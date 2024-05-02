@@ -1,5 +1,7 @@
 package com.chae.book.springboot.web;
 
+import com.chae.book.springboot.config.auth.LoginUser;
+import com.chae.book.springboot.config.auth.dto.SessionUser;
 import com.chae.book.springboot.services.PostsService;
 import com.chae.book.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +16,21 @@ public class IndexController {
 
     private final PostsService postsService;
 
-    public String index(Model model) {
+    @GetMapping("/")
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
-        //머스테치 스타터 덕분에 .mastache 확장자를 붙이지 않아도 자동으로 붙여준다.
     }
 
+    @GetMapping("/posts/save")
+    public String postsSave() {
+        return "posts-save";
+    }
 
+    @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
