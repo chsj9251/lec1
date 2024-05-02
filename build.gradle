@@ -19,12 +19,6 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('com.h2database:h2')
-
-    //mustache
-    implementation('org.springframework.boot:spring-boot-starter-mustache')
-
-    //Oauth Security
-    implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
 }
 
 test {
