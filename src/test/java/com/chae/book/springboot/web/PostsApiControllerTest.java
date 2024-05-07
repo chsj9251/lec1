@@ -41,9 +41,10 @@ public class PostsApiControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private WebApplicationContext context;
-
     private PostsRepository postsRepository;
+
+    @Autowired
+    private WebApplicationContext context;
 
     private MockMvc mvc;
 
