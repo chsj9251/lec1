@@ -17,8 +17,117 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="574059b9-fc1c-40b1-8894-ae307db0a834">
-      <console name="chae-db" type="STANDARD" schema="freelec_springboot2_webservice" session="Main"><![CDATA[use freelec_springboot2_webservice;
-show tables;]]></console>
+      <console name="chae-db" type="STANDARD" schema="freelec_springboot2_webservice" session="Main"><![CDATA[use freelec_springboot2_webservice
+SELECT * FROM user;
+
+ALTER TABLE user
+ALTER role SET DEFAULT 'USER';
+
+SELECT * FROM user;
+
+TRUNCATE TABLE user; 
+
+SELECT * FROM user;]]></console>
+      <console name="chae-db 1" type="STANDARD" schema="freelec_springboot2_webservice" session="Main"><![CDATA[use freelec_springboot2_webservice
+
+show tables;
+
+
+SELECT * from User;
+SELECT * from Robot;
+SELECT * from Tasks;
+SELECT * from Target;
+
+UPDATE user set role = 'USER';
+
+user, role set = 'USER';
+
+SELECT * FROM user role;]]></console>
+      <console name="project" type="STANDARD" schema="freelec_springboot2_webservice" session="Main"><![CDATA[use freelec_springboot2_webservice
+
+SELECT * from User;
+SELECT * from Robot;
+SELECT * from Tasks;
+SELECT * from Target;
+
+/* User */
+DROP TABLE User; /* 테이블이 있다면 삭제 */
+
+CREATE TABLE User (
+    user_id INTEGER AUTO_INCREMENT,
+    username VARCHAR(50),
+    password VARCHAR(50),
+    email VARCHAR(50),
+    phone_number VARCHAR(50),
+    currnet_x DOUBLE,
+    current_y DOUBLE,
+    use_yn BOOLEAN,
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    role VARCHAR(50),
+    PRIMARY KEY (user_id)
+);
+
+INSERT INTO User values (null , 'user1', '1234', 'user1@email.com', '010-1234-5678',80.0 ,87.1, true, default, default, default );
+DELETE FROM  User where user_id=1;
+/* Robot */
+DROP TABLE Robot; /* 테이블이 있다면 삭제 */
+
+CREATE TABLE Robot (
+    robot_id INTEGER AUTO_INCREMENT,
+    name VARCHAR(50),
+    current_x DOUBLE,
+    current_y DOUBLE,
+    status VARCHAR(50),
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (robot_id)
+);
+
+INSERT INTO Robot values (null, 'robot1', 80.0, 87.1, 'active', default, default);
+
+
+/* Tasks */
+DROP TABLE Tasks; /* 테이블이 있다면 삭제 */
+
+CREATE TABLE Tasks (
+    task_id INTEGER AUTO_INCREMENT,
+    robot_id INTEGER,
+    destination_x DOUBLE,
+    destination_y DOUBLE,
+    task_status VARCHAR(50),
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (task_id),
+    FOREIGN KEY (robot_id) REFERENCES Robot(robot_id)
+);
+
+INSERT INTO Tasks values (null, null, 80.0, 87.1, 'running', default, default);
+
+
+
+/* Target */
+DROP TABLE Target; /* 테이블이 있다면 삭제 */
+
+CREATE TABLE Target (
+    target_id INTEGER AUTO_INCREMENT,
+    task_id INTEGER,
+    target_name VARCHAR(50),
+    wait_time INTEGER,
+    open_time VARCHAR(50),
+    close_time VARCHAR(50),
+    min_heght INTEGER,
+    max_heght INTEGER,
+    target_x DOUBLE,
+    target_y DOUBLE,
+    target_status VARCHAR(50),
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (target_id),
+    FOREIGN KEY (task_id) REFERENCES Tasks(task_id)
+);
+
+INSERT INTO Target values (null, null, '회전목마', 10, '9:00', '20:00', 120, 190, 80.0, 87.1, 'Open', default, default);]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
